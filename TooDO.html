@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To DO</title>
+</head>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+<style>
+    body{
+        background-color: #F1DEC9;
+    }
+    .todo{
+        max-width: 500px;
+        margin: 50px auto;
+        background-color: burlywood;
+        padding: 20px;
+        border-radius: 20px;
+    }
+
+</style>
+<body>
+    <div class="todo">
+        <h1 class="text-center mb-4">To Do List</h1>
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" id="imput" placeholder="Add Task............">
+            <button class="btn btn-dark" id="addBtn" onclick="btn1()">add</button>
+        </div>
+        <ul class="list-group" id="apndList">
+            <!-- <li class="mb-2 d-flex list-style-type-none justify-content-between align-items-center">
+                <span class="text-center">GYm</span>
+                <div>
+                    <button class="btn btn-success btn-sm me-2 complete-btn">Complete</button>
+                    <button class="btn btn-danger btn-sm delete-btn">Delete</button>
+                </div>
+            </li> -->
+        </ul>
+    </div>
+    
+</body>
+
+<script>
+
+
+    ///////////////////////////////////////////////
+    
+    let btn1 = (() =>{
+        
+      
+        let imput = document.getElementById("imput").value;
+        
+        
+    if (imput=='') {
+        alert('please enter input')
+    }else{
+
+        let addBtn = document.getElementById("addBtn");
+    
+        let apndList = document.getElementById("apndList");
+        
+        
+    let lisst = document.createElement("li");
+    lisst.classList.add('mb-2', 'd-flex', 'list-style-type-none', 'justify-content-between', 'align-items-center');
+    // ---------
+    let spann = document.createElement("span");
+    spann.classList.add('text-center');
+    spann.textContent = imput;
+    lisst.appendChild(spann);
+    // ----------
+    let taskDiv = document.createElement("div");
+    
+    let compBtn = document.createElement("button");
+    compBtn.classList.add('btn', 'btn-success', 'btn-sm', 'me-2', 'complete-btn');
+    compBtn.textContent = "Complete";
+
+    compBtn.addEventListener("click",()=>{
+        spann.style.textDecoration = "line-through"
+       
+    });
+
+    taskDiv.appendChild(compBtn);
+
+    // ------------------
+
+    let editbtn = document.createElement("button");
+    editbtn.classList.add('btn', 'btn-info', 'btn-sm', 'me-2');
+    editbtn.textContent = "Update";
+
+    editbtn.addEventListener("click",()=>{
+        document.getElementById("imput").value = spann.textContent;
+        apndList.removeChild(lisst);
+    })
+    taskDiv.appendChild(editbtn);
+    
+    // ---------
+    let delBtn = document.createElement("button");
+    delBtn.classList.add('btn', 'btn-danger', 'btn-sm', 'delete-btn');
+    delBtn.textContent = "Delete";
+
+    delBtn.addEventListener("click",()=>{
+        apndList.removeChild(lisst);
+    })
+
+    taskDiv.appendChild(delBtn);
+    
+    // ===
+    
+    lisst.appendChild(taskDiv);
+
+    apndList.insertAdjacentElement("afterbegin", lisst);
+   
+   
+    // ==================
+} 
+document.getElementById("imput").value = "";
+
+ 
+})
+
+
+ 
+
+// let cleardata = document.getElementById("imput");
+// cleardata.remove()
+
+
+
+
+
+    
+
+
+
+</script>
+</html>
