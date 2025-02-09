@@ -192,7 +192,13 @@
     compBtn.textContent = "Complete";
 
     compBtn.addEventListener("click",()=>{
-        spann.style.textDecoration = "line-through"
+        // spann.style.textDecoration = "line-through" 
+
+        if (spann.style.textDecoration == "line-through") {
+        spann.style.textDecoration = "none";
+    } else {
+        spann.style.textDecoration = "line-through";
+    }
        
     });
 
