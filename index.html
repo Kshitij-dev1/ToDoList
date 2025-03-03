@@ -161,6 +161,8 @@
 
 
     ///////////////////////////////////////////////
+    document.addEventListener("DOMContentLoaded", loadTasks);
+
     
     let btn1 = (() =>{
         
@@ -199,6 +201,7 @@
     } else {
         spann.style.textDecoration = "line-through";
     }
+    saveTasks();
        
     });
 
@@ -213,6 +216,7 @@
     editbtn.addEventListener("click",()=>{
         document.getElementById("imput").value = spann.textContent;
         apndList.removeChild(lisst);
+        saveTasks();
     })
     taskDiv.appendChild(editbtn);
     
@@ -223,6 +227,7 @@
 
     delBtn.addEventListener("click",()=>{
         apndList.removeChild(lisst);
+        saveTasks();
     })
 
     taskDiv.appendChild(delBtn);
@@ -231,12 +236,17 @@
     
     lisst.appendChild(taskDiv);
 
-    apndList.insertAdjacentElement("afterbegin", lisst);
+    // apndList.insertAdjacentElement("afterbegin", lisst);
+    // OR
+    apndList.prepend(lisst);
    
    
     // ==================
 } 
 document.getElementById("imput").value = "";
+// document.getElementById("imput").focus();
+saveTasks();
+
 
  
 });
@@ -252,6 +262,102 @@ document.getElementById("imput").value = "";
 // let cleardata = document.getElementById("imput");
 // cleardata.remove()
 
+function saveTasks(){
+    let tasks =[];
+
+    document.querySelectorAll("#apndList li").forEach((li)=>{
+        let taskText = li.querySelector("span").textContent;
+        let isCompleted = li.querySelector("span").style.textDecoration === "line-through";
+        tasks.push({text: taskText,
+
+                    completed : isCompleted
+        });
+    });
+    localStorage.setItem("tasks",JSON.stringify(tasks));
+}
+
+function loadTasks() {
+    let savedTasks = JSON.parse(localStorage.getItem("tasks")) || [];
+    let apndList = document.getElementById("apndList");
+
+    if (!apndList) {
+        console.error("Error: Element #apndList not found");
+        return;
+    }
+
+    apndList.innerHTML = ""; // Prevent duplicate tasks
+
+    savedTasks.forEach((task) => {
+        let lisst = document.createElement("li");
+        lisst.classList.add('list-group-item', 'mb-2', 'over', 'list-style-type-none', 'justify-content-between', 'align-items-center');
+
+        let spann = document.createElement("span");
+        spann.classList.add('text-center', 'over2');
+        spann.textContent = task.text;
+        if (task.completed) spann.style.textDecoration = "line-through";
+
+        let taskDiv = document.createElement("div");
+
+        let compBtn = document.createElement("button");
+        compBtn.classList.add('btn', 'btn-success', 'btn-sm', 'me-2', 'complete-btn');
+        compBtn.textContent = "Complete";
+
+        compBtn.addEventListener("click", () => {
+            spann.style.textDecoration = spann.style.textDecoration === "line-through" ? "none" : "line-through";
+            saveTasks();
+        });
+
+        let editbtn = document.createElement("button");
+        editbtn.classList.add('btn', 'btn-info', 'btn-sm', 'me-2');
+        editbtn.textContent = "Update";
+
+        editbtn.addEventListener("click", () => {
+            document.getElementById("imput").value = spann.textContent;
+            apndList.removeChild(lisst);
+            saveTasks();
+        });
+
+        let delBtn = document.createElement("button");
+        delBtn.classList.add('btn', 'btn-danger', 'btn-sm', 'delete-btn');
+        delBtn.textContent = "Delete";
+
+        delBtn.addEventListener("click", () => {
+            apndList.removeChild(lisst);
+            saveTasks();
+        });
+
+        // Append elements in the correct order
+        taskDiv.appendChild(compBtn);
+        taskDiv.appendChild(editbtn);
+        taskDiv.appendChild(delBtn);
+        lisst.appendChild(spann); // Append the span before taskDiv
+        lisst.appendChild(taskDiv);
+        apndList.appendChild(lisst);
+    });
+}
+
+
+// Function to reset the entire task list
+function resetTasks() {
+    localStorage.removeItem("tasks"); // Remove saved tasks from localStorage
+    document.getElementById("apndList").innerHTML = ""; // Clear the displayed list
+}
+let resetDiv = document.createElement("div");
+resetDiv.classList.add('text-center', 'mt-3'); // Centering class
+
+// Create the Reset button
+let resetBtn = document.createElement("button");
+resetBtn.classList.add('btn', 'btn-secondary'); // Styling
+resetBtn.innerHTML = '<i class="fa-solid fa-trash-can"></i> Reset List'; // Add icon and textresetBtn.addEventListener("click", resetTasks);
+
+// Attach event listener correctly
+resetBtn.addEventListener("click", resetTasks);
+
+// Append the button inside the div
+resetDiv.appendChild(resetBtn);
+
+// Append the div after the To-Do list
+document.querySelector(".todo").appendChild(resetDiv);
 
 
 
