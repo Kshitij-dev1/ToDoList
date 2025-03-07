@@ -56,12 +56,11 @@
             color: white;
             text-align: center;
             padding: 20px;
-            /* position: fixed; */
-            /* bottom: 0;
-            left: 0; */
+            position: fixed;
+            bottom: 0;
             width: 100%;
-            margin-top: auto;
-            flex-shrink: 0; /* Prevents the footer from causing extra scroll */
+            /* margin-top: auto; */
+            flex-shrink: 0;
         }
         .footer a {
             color: #ffffff;
@@ -84,6 +83,14 @@
                margin-bottom: 0rem;
                display: inline-grid;
             }
+            
+            p.contact_me {
+                display: none;
+            }
+            p.links_me {
+                /* margin: 10px; */
+                gap: 10%;
+            }
             .hide{
                 display: none;
             }
@@ -103,7 +110,11 @@
             p {
                margin-top: 0;
                margin-bottom: 0rem;
-               display: inline-grid;
+               display: ruby;
+               font-size: medium;
+            }
+            .icon_p{
+                line-height: inherit !important;
             }
             .hide{
                 display: none;
@@ -153,14 +164,12 @@
         </ul>
     </div>
     <div class="footer">
-        <p>Connect with me :</p>
-        <p>
-            <a href="tel:+918178495354"><i class="fas fa-phone"></i>+91 8178495354</a> <span class="hide">|</span>
-            <a href="mailto:kshitj95official@gmail.com"><i class="fas fa-envelope"></i>kshitj95official@gmail.com</a>
-        </p>
-        <p class="linkdin">
+        <p class="contact_me">Connect with me :</p>
+        <p class="links_me">
+            <a href="tel:+918178495354"><i class="fas fa-phone icon_p"></i>+91 8178495354</a> <span class="hide">|</span>
+            <a href="mailto:kshitj95official@gmail.com"><i class="fas fa-envelope icon_p"></i>kshitj95official@gmail.com</a>
             <a href="https://www.linkedin.com/in/kshitij-singh-477aab202" target="_blank">
-                <i class="fab fa-linkedin linkdin"></i>LinkedIn
+                <i class="fab fa-linkedin linkdin icon_p"></i>LinkedIn
             </a>
         </p>
     </div>
