@@ -9,11 +9,16 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 <style>
     html{
+        box-sizing: border-box;
+        -webkit-text-size-adjust: 100%; /* Prevents font scaling in landscape mode on iOS */
         height: auto; /* Allows dynamic height without extra scroll */
         display: flex;
         flex-direction: column;
         margin: 0;
     }
+    *, *:before, *:after {
+            box-sizing: inherit;
+        }
         body {
             background: linear-gradient(135deg, #f3e5f5, #e1bee7);
             font-family: 'Arial', sans-serif;
@@ -53,6 +58,7 @@
             background: #f3e5f5;
             padding: 10px 15px;
             transition: background 0.3s ease;
+            text-align: left; /* Align text to the left */
         }
         .list-group-item:hover {
             background: #e1bee7;
