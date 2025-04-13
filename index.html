@@ -44,6 +44,13 @@
             align-items: center;
             justify-content: flex-start;
         }
+        .btn-jk {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 3%;
+            gap: 2%;
+        }
         h1 {
             font-weight: bold;
             font-size: 1.8rem;
@@ -214,14 +221,15 @@
     lisst.classList.add('list-group-item','mb-2', 'over', 'list-style-type-none', 'justify-content-between', 'align-items-center');
     // ---------
     let spann = document.createElement("span");
-    spann.classList.add('text-center','over2');
+    spann.classList.add('text-center','over2','d-flex','justify-content-center');
     spann.textContent = imput;
     lisst.appendChild(spann);
     // ----------
     let taskDiv = document.createElement("div");
+    taskDiv.classList.add("btn-jk");
     
     let compBtn = document.createElement("button");
-    compBtn.classList.add('btn', 'btn-success', 'btn-sm', 'me-2', 'complete-btn');
+    compBtn.classList.add('btn', 'btn-success', 'btn-sm', 'me-2', 'complete-btn ');
     compBtn.textContent = "Complete";
 
     compBtn.addEventListener("click",()=>{
@@ -323,11 +331,12 @@ function loadTasks() {
         lisst.classList.add('list-group-item', 'mb-2', 'over', 'list-style-type-none', 'justify-content-between', 'align-items-center');
 
         let spann = document.createElement("span");
-        spann.classList.add('text-center', 'over2');
+        spann.classList.add('text-center', 'over2', 'd-flex','justify-content-center');
         spann.textContent = task.text;
         if (task.completed) spann.style.textDecoration = "line-through";
 
         let taskDiv = document.createElement("div");
+        taskDiv.classList.add("btn-jk");
 
         let compBtn = document.createElement("button");
         compBtn.classList.add('btn', 'btn-success', 'btn-sm', 'me-2', 'complete-btn');
