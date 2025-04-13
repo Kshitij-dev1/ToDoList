@@ -222,7 +222,7 @@
     // ---------
     let spann = document.createElement("span");
     spann.classList.add('text-center','over2','d-flex','justify-content-center');
-    spann.textContent = imput;
+    spann.textContent = imput.charAt(0).toUpperCase() + imput.slice(1);;
     lisst.appendChild(spann);
     // ----------
     let taskDiv = document.createElement("div");
